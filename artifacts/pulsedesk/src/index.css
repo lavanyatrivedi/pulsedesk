@@ -79,44 +79,44 @@
   --elevate-1: rgba(0, 0, 0, 0.03);
   --elevate-2: rgba(0, 0, 0, 0.08);
 
-  --background: 42 34% 95%;
+  --background: 42 24% 97%;
   --foreground: 215 28% 19%;
-  --border: 40 20% 85%;
-  --card: 42 38% 98%;
+  --border: 40 16% 88%;
+  --card: 0 0% 100%;
   --card-foreground: 215 28% 19%;
   --card-border: 40 20% 85%;
-  --sidebar: 215 28% 19%;
-  --sidebar-foreground: 42 34% 95%;
-  --sidebar-border: 215 20% 28%;
-  --sidebar-primary: 64 73% 61%;
-  --sidebar-primary-foreground: 215 28% 19%;
-  --sidebar-accent: 215 22% 25%;
-  --sidebar-accent-foreground: 42 34% 95%;
-  --sidebar-ring: 64 73% 61%;
+  --sidebar: 0 0% 100%;
+  --sidebar-foreground: 215 28% 19%;
+  --sidebar-border: 40 16% 88%;
+  --sidebar-primary: 176 37% 38%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 42 24% 95%;
+  --sidebar-accent-foreground: 215 28% 19%;
+  --sidebar-ring: 176 37% 38%;
   --popover: 42 38% 98%;
   --popover-foreground: 215 28% 19%;
   --popover-border: 40 20% 85%;
   --primary: 215 28% 19%;
   --primary-foreground: 42 34% 95%;
-  --secondary: 209 34% 91%;
+  --secondary: 42 22% 95%;
   --secondary-foreground: 215 28% 19%;
-  --muted: 40 24% 91%;
+  --muted: 42 18% 93%;
   --muted-foreground: 215 13% 47%;
-  --accent: 64 73% 61%;
-  --accent-foreground: 215 28% 19%;
+  --accent: 176 37% 38%;
+  --accent-foreground: 0 0% 100%;
   --destructive: 4 64% 48%;
   --destructive-foreground: 42 34% 95%;
   --input: 40 20% 85%;
-  --ring: 64 73% 61%;
-  --chart-1: 64 73% 61%;
-  --chart-2: 187 42% 43%;
+  --ring: 176 37% 38%;
+  --chart-1: 176 37% 38%;
+  --chart-2: 176 37% 38%;
   --chart-3: 15 61% 54%;
   --chart-4: 215 28% 19%;
   --chart-5: 40 20% 61%;
   --app-font-sans: 'DM Sans', sans-serif;
   --app-font-serif: 'Instrument Serif', Georgia, serif;
   --app-font-mono: 'Space Mono', monospace;
-  --radius: 0.5rem; /* 8px */
+  --radius: 0.35rem; /* 6px */
   --shadow-2xs: 0px 2px 0px 0px hsl(215 28% 19% / 0.03);
   --shadow-xs: 0px 2px 0px 0px hsl(215 28% 19% / 0.03);
   --shadow-sm:
@@ -390,9 +390,7 @@
 @layer base {
   body {
     min-width: 320px;
-    background:
-      radial-gradient(circle at 80% -10%, hsl(var(--accent) / 0.16), transparent 31rem),
-      hsl(var(--background));
+    background: hsl(var(--background));
   }
   button, a, select {
     -webkit-tap-highlight-color: transparent;
@@ -410,19 +408,19 @@
 }
 
 .desk-rail {
-  width: 238px;
-  flex: 0 0 238px;
+  width: 208px;
+  flex: 0 0 208px;
   background: hsl(var(--sidebar));
   color: hsl(var(--sidebar-foreground));
   display: flex;
   flex-direction: column;
-  padding: 24px 16px 18px;
+  padding: 22px 14px 18px;
 }
 
 .desk-content {
   flex: 1;
   min-width: 0;
-  padding: 30px clamp(20px, 4vw, 58px) 44px;
+  padding: 28px clamp(20px, 4vw, 52px) 44px;
 }
 
 .rail-logo-mark {

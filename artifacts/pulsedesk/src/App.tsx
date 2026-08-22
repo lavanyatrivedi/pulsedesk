@@ -264,8 +264,8 @@ function AppDashboard() {
               <span className="h-1 w-1 rounded-full bg-[hsl(var(--accent-foreground))]" />
               <span className="mono text-[10px]">Morning desk</span>
             </div>
-            <h1 className="mt-4 text-[clamp(2.1rem,5vw,4.25rem)] font-semibold leading-[.98] tracking-[-0.065em] text-[hsl(var(--foreground))]">The market, <span className="display-serif font-normal italic">decoded.</span></h1>
-            <p className="mt-4 max-w-lg text-sm leading-6 text-[hsl(var(--muted-foreground))]">A clear read on what moved the tape, what the headlines imply, and where the next five days could land.</p>
+            <h1 className="mt-4 text-[clamp(2rem,4vw,3.5rem)] font-semibold leading-[1] tracking-[-0.06em] text-[hsl(var(--foreground))]">The market, <span className="display-serif font-normal italic">decoded.</span></h1>
+            <p className="mt-4 max-w-md text-sm leading-6 text-[hsl(var(--muted-foreground))]">A clear read on what moved the tape and where the next five days could land.</p>
           </div>
           <div className="flex items-end gap-3">
             <CommodityPicker commodities={commodities} selected={selectedSymbol} onSelect={setSelectedSymbol} />
@@ -285,13 +285,13 @@ function AppDashboard() {
 
         <section className="mt-5 grid gap-5 lg:grid-cols-[1.5fr_.8fr]">
           <article className="panel panel-hover fade-up fade-up-1 relative overflow-hidden p-6 sm:p-8" id="brief" data-testid="panel-desk-brief">
-            <div className="absolute right-0 top-0 h-48 w-48 translate-x-16 -translate-y-20 rounded-full border-[18px] border-[hsl(var(--accent)/.32)]" />
+            <div className="absolute right-8 top-0 h-24 w-24 translate-y-[-42px] rounded-full border-[10px] border-[hsl(var(--accent)/.16)]" />
             <div className="relative">
               <div className="flex items-center justify-between">
                 <div className="section-kicker">Desk brief</div>
                 <div className="rounded-full bg-[hsl(var(--accent)/.42)] px-2.5 py-1 mono text-[9px] font-bold uppercase tracking-[.1em] text-[hsl(var(--accent-foreground))]">Signal / {sentimentLabel(averageSentiment)}</div>
               </div>
-              {briefQuery.isLoading ? <div className="mt-10"><div className="skeleton h-7 w-4/5" /><div className="skeleton mt-3 h-7 w-3/5" /><div className="skeleton mt-7 h-3 w-full" /><div className="skeleton mt-2 h-3 w-11/12" /></div> : brief ? <p className="mt-9 max-w-3xl text-[clamp(1.5rem,3vw,2.45rem)] leading-[1.12] tracking-[-0.045em] text-[hsl(var(--foreground))]" data-testid="text-desk-brief">{brief.brief}</p> : <EmptyPanel label="desk brief" />}
+              {briefQuery.isLoading ? <div className="mt-10"><div className="skeleton h-7 w-4/5" /><div className="skeleton mt-3 h-7 w-3/5" /><div className="skeleton mt-7 h-3 w-full" /><div className="skeleton mt-2 h-3 w-11/12" /></div> : brief ? <p className="mt-9 max-w-3xl text-[clamp(1.35rem,2.2vw,2rem)] leading-[1.2] tracking-[-0.04em] text-[hsl(var(--foreground))]" data-testid="text-desk-brief">{brief.brief}</p> : <EmptyPanel label="desk brief" />}
               <div className="mt-9 flex flex-wrap items-end gap-x-10 gap-y-5 border-t border-[hsl(var(--border))] pt-5">
                 <div><div className="section-kicker">Last price</div><div className="mono mt-2 text-2xl font-bold tracking-[-.04em]" data-testid="text-latest-price">{formatPrice(latestPrice, commodity?.currency)}</div></div>
                 <div><div className="section-kicker">Session change</div><div className={`mono mt-2 flex items-center gap-1.5 text-xl font-bold tracking-[-.04em] ${computedChange !== undefined && computedChange >= 0 ? 'text-[#3b777c]' : 'text-[#b25546]'}`} data-testid="text-session-change">{computedChange !== undefined && computedChange >= 0 ? <TrendingUp size={17} /> : <TrendingDown size={17} />}{formatPct(computedChange)}</div></div>
