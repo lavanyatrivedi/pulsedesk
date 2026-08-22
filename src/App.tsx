@@ -155,7 +155,9 @@ function Sidebar() {
     <aside className="desk-rail" data-testid="navigation-sidebar">
       <div className="rail-topline">
         <div className="flex items-center gap-3">
-          <div className="rail-logo-mark"><Signal size={17} strokeWidth={2.5} /></div>
+          <div className="rail-logo-mark">
+            <img src="/logo-white.png" alt="PulseDesk Logo" className="h-4.5 w-4.5 object-contain" />
+          </div>
           <div>
             <div className="text-[15px] font-bold tracking-[-0.02em]">PulseDesk</div>
             <div className="mono mt-0.5 text-[9px] uppercase tracking-[0.14em] text-[hsl(var(--sidebar-foreground)/.48)]">Market intelligence</div>
