@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "PulseDesk"
+description = "An event-driven commodity sentiment dashboard that pairs price movement with market catalysts, sentiment scoring, and a concise morning desk brief."
+version = "1.0.0"
+id = "artifacts/pulsedesk"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18507
+
+[services.development]
+run = "pnpm --filter @workspace/pulsedesk run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/pulsedesk", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/pulsedesk/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18507"
+BASE_PATH = "/"

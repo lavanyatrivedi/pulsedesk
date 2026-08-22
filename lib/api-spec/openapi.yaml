@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: markets
+    description: Commodity market intelligence
 paths:
   /healthz:
     get:
@@ -24,6 +26,82 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /commodities:
+    get:
+      operationId: listCommodities
+      tags: [markets]
+      summary: List tracked commodities
+      responses:
+        "200":
+          description: Tracked commodities
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Commodity"
+  /prices:
+    get:
+      operationId: getPrices
+      tags: [markets]
+      summary: Get price history
+      parameters:
+        - name: commodity
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Daily closing prices
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PricePoint"
+        "404":
+          description: No price data
+  /events:
+    get:
+      operationId: getEvents
+      tags: [markets]
+      summary: Get market events and realized moves
+      parameters:
+        - name: commodity
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Market events
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/MarketEvent"
+  /brief:
+    get:
+      operationId: getBrief
+      tags: [markets]
+      summary: Generate a morning desk brief
+      parameters:
+        - name: commodity
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Desk brief
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/DeskBrief"
+        "404":
+          description: Not enough market data
 components:
   schemas:
     HealthStatus:
@@ -33,4 +111,54 @@ components:
           type: string
       required:
         - status
+    Commodity:
+      type: object
+      properties:
+        symbol:
+          type: string
+        name:
+          type: string
+        unit:
+          type: string
+        currency:
+          type: string
+      required: [symbol, name, unit, currency]
+    PricePoint:
+      type: object
+      properties:
+        date:
+          type: string
+        close:
+          type: number
+      required: [date, close]
+    MarketEvent:
+      type: object
+      properties:
+        date:
+          type: string
+        headline:
+          type: string
+        category:
+          type: string
+        sentimentScore:
+          type: number
+        priceMove5d:
+          type: number
+        source:
+          type: string
+      required: [date, headline, category, sentimentScore, priceMove5d, source]
+    DeskBrief:
+      type: object
+      properties:
+        commodity:
+          type: string
+        brief:
+          type: string
+        latestPrice:
+          type: number
+        changePct:
+          type: number
+        asOf:
+          type: string
+      required: [commodity, brief, latestPrice, changePct, asOf]
 
