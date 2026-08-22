@@ -67,29 +67,29 @@ function findCommodity(symbol: string) {
   return commodities.find((c) => c.symbol === symbol);
 }
 
-app.get('/api/healthz', (_req: Request, res: Response) => {
+app.get(['/api/healthz', '/healthz'], (_req: Request, res: Response) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-app.get('/api/commodities', (_req: Request, res: Response) => {
+app.get(['/api/commodities', '/commodities'], (_req: Request, res: Response) => {
   res.json(commodities);
 });
 
-app.get('/api/prices', (req: Request, res: Response) => {
+app.get(['/api/prices', '/prices'], (req: Request, res: Response) => {
   const symbol = req.query.commodity as string;
   if (!symbol) return res.status(400).json({ error: 'commodity query parameter is required' });
   if (!findCommodity(symbol)) return res.status(404).json({ error: 'No price data for that commodity' });
   return res.json(makePrices(symbol));
 });
 
-app.get('/api/events', (req: Request, res: Response) => {
+app.get(['/api/events', '/events'], (req: Request, res: Response) => {
   const symbol = req.query.commodity as string;
   if (!symbol) return res.status(400).json({ error: 'commodity query parameter is required' });
   if (!findCommodity(symbol)) return res.status(404).json({ error: 'No events for that commodity' });
   return res.json(eventTemplates[symbol] ?? []);
 });
 
-app.get('/api/brief', (req: Request, res: Response) => {
+app.get(['/api/brief', '/brief'], (req: Request, res: Response) => {
   const symbol = req.query.commodity as string;
   if (!symbol) return res.status(400).json({ error: 'commodity query parameter is required' });
   const commodity = findCommodity(symbol);
