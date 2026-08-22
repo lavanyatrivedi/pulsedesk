@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const eventTemplates: Record<string, any[]> = {
   'CL=F': [
@@ -19,9 +19,9 @@ const eventTemplates: Record<string, any[]> = {
   ],
 };
 
-export default function handler(req: Request, res: Response) {
+export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   const symbol = req.query.commodity as string;
   if (!symbol) return res.status(400).json({ error: 'Commodity required' });
-  return res.json(eventTemplates[symbol] ?? []);
+  return res.status(200).json(eventTemplates[symbol] ?? []);
 }

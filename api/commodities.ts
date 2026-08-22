@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const commodities = [
   { symbol: 'CL=F', name: 'Crude Oil', unit: 'per barrel', currency: 'USD' },
@@ -6,7 +6,7 @@ const commodities = [
   { symbol: 'NG=F', name: 'Natural Gas', unit: 'per MMBtu', currency: 'USD' },
 ];
 
-export default function handler(_req: Request, res: Response) {
+export default function handler(_req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
-  res.json(commodities);
+  return res.status(200).json(commodities);
 }

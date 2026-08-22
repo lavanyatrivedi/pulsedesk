@@ -1,4 +1,4 @@
-import type { Request, Response } from 'express';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 const commodities = [
   { symbol: 'CL=F', name: 'Crude Oil', unit: 'per barrel', currency: 'USD' },
@@ -14,7 +14,7 @@ const eventTemplates: Record<string, any[]> = {
 
 const bases: Record<string, number> = { 'CL=F': 76.42, 'GC=F': 2478.6, 'NG=F': 3.18 };
 
-export default function handler(req: Request, res: Response) {
+export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   const symbol = req.query.commodity as string;
   const commodity = commodities.find((c) => c.symbol === symbol);
@@ -29,7 +29,7 @@ export default function handler(req: Request, res: Response) {
   const lead = events[0]?.headline ?? 'No major catalysts have been logged recently.';
   const brief = `${commodity.name} is trading with a ${tone} bias, up ${Math.abs(changePct).toFixed(2)}% across the tracked window. The latest catalyst is ${lead.toLowerCase()} The tape is responding more to event risk than to a clean trend, so keep position sizing measured around the next scheduled release.`;
 
-  return res.json({
+  return res.status(200).json({
     commodity: commodity.symbol,
     brief,
     latestPrice,

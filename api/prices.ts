@@ -1,10 +1,10 @@
-import type { Request, Response } from 'express';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 type PricePoint = { date: string; close: number };
 
 const bases: Record<string, number> = { 'CL=F': 76.42, 'GC=F': 2478.6, 'NG=F': 3.18 };
 
-export default function handler(req: Request, res: Response) {
+export default function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   const symbol = req.query.commodity as string;
   if (!symbol || !bases[symbol]) return res.status(400).json({ error: 'Valid commodity symbol required' });
@@ -19,5 +19,5 @@ export default function handler(req: Request, res: Response) {
     const close = base - base * 0.028 + wave + drift + eventPulse;
     points.push({ date: date.toISOString().slice(0, 10), close: Number(close.toFixed(2)) });
   }
-  return res.json(points);
+  return res.status(200).json(points);
 }
