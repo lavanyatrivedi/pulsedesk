@@ -156,10 +156,10 @@ function Sidebar() {
       <div className="rail-topline">
         <div className="flex items-center gap-3">
           <div className="rail-logo-mark">
-            <img src="/logo-white.png" alt="PulseDesk Logo" className="h-4.5 w-4.5 object-contain" />
+            <img src="/logo-white.png" alt="PulseDeck Logo" className="h-4.5 w-4.5 object-contain" />
           </div>
           <div>
-            <div className="text-[15px] font-bold tracking-[-0.02em]">PulseDesk</div>
+            <div className="text-[15px] font-bold tracking-[-0.02em]">PulseDeck</div>
             <div className="mono mt-0.5 text-[9px] uppercase tracking-[0.14em] text-[hsl(var(--sidebar-foreground)/.48)]">Market intelligence</div>
           </div>
         </div>
@@ -339,7 +339,7 @@ function AppDashboard() {
         </section>
 
         <footer className="mt-8 flex flex-col gap-2 border-t border-[hsl(var(--border))] pt-5 text-[10px] text-[hsl(var(--muted-foreground))] sm:flex-row sm:items-center sm:justify-between">
-          <span data-testid="text-footer-status">PulseDesk / Focused on the first read.</span>
+          <span data-testid="text-footer-status">PulseDeck / Focused on the first read.</span>
           <span className="mono">Prices are indicative · Sources shown per catalyst</span>
         </footer>
       </main>
